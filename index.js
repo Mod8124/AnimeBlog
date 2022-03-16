@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const router = require('./routes/blogRoutes')
 const midlewares = require('./middlewares/authMiddleware')
 const port = process.env.PORT || 3000;
+
 require('dotenv').config()
 
 

@@ -5,11 +5,12 @@
     <div class="center">
         <h1>Welcome to
             <%if(blog) { %>
-                <%=blog.title%>
+               <%=blog.title%>
            <% } %>
         </h1>
          <p>"I don't like expeding more effort thatn I have to."</p>
          <h4>~Ayanokouki Kiyotaka</h4>
+         <a class="btn" href="/blogs">More Blogs</a>
     </div>
     
     </div>
@@ -153,7 +154,7 @@
        
     }
 
-    getFetch('https://animechan.vercel.app/api/random')
+    // getFetch('https://animechan.vercel.app/api/random')
 
     formComment.addEventListener('submit', async(e)=> {
         e.preventDefault()

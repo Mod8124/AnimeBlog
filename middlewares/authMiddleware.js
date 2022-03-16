@@ -13,7 +13,6 @@ const requireAuth = (req, res, next) => {
           console.log(err.message);
           res.redirect('/login');
         } else {
-          console.log(decodedToken);
           next();
         }
       });
@@ -43,7 +42,6 @@ const requireAuth = (req, res, next) => {
           res.locals.user = null;
           next();
         } else {
-          console.log(decodedToken);
           let user = await User.findById(decodedToken.id)
           res.locals.user = user;
           next();

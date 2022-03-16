@@ -424,7 +424,7 @@ label {
 .wrapBlog .center h4 {
     color:red;
     font-weight: 700;
-    font-size: 1.4em;
+    font-size: 1.5em;
 }
 
 .title {
@@ -446,7 +446,7 @@ label {
 
 .card {
     max-width: 300px;
-    overflow: hidden;
+   min-height: 450px;
     padding: 20px;
     background-color: white;
     padding-bottom: 0;
@@ -570,11 +570,12 @@ textarea:focus {
 }
 
 .wrapBlogDos {
-    background-image: url('https://images.unsplash.com/photo-1555050551-82f8d95a0614?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background-image: url('https://images.unsplash.com/photo-1604928141064-207cea6f571f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80');
 }
 
 .wrapBlogDos .center {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.0);
+    padding:20px;
 }
 
 .blogDetail .center {
@@ -784,7 +785,6 @@ textarea:focus {
 @media screen and (min-width:1500px) {
     .blogWrap .center {
         grid-template-columns: auto auto auto auto;
-        justify-content: space-between;
     }
 }
 
