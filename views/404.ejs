@@ -1,45 +1,16 @@
 <%-include('partials/head.ejs',{name:'HomePage'})%>
 
 <%-include('partials/nav.ejs')%>
-<div class="wrapper">
-<div class="center">
-  <h1>Error 404</h1>
-  <p>Page doesn't found it</p>
-<a class="btn" href="/">Home page</a>
-</div>
+    <main class="wrapper">
 
-</div>
-<script>
+    <section class="center">
+        <h1>Error <strong>404</strong></h1>
+         <p>Page doesn't found it</p>
+        <a class="btn" href="/">Home Page</a>
+    </section>
 
-    const moon = document.querySelector('.moon')
-    const logo = document.querySelector('#logo>img')
+    </main>
 
-    moon.addEventListener('click', (e)=>{
-        document.body.classList.toggle('active')
-
-        localStorage.setItem('active', true)
-
-        if(document.body.classList.contains('active')) {
-          logo.src = '/logoBlack.svg'
-
-        } else {
-            logo.src = '/logo.svg';
-            localStorage.setItem('active', false)
-        }
-
-    })
-
-    window.addEventListener('load', ()=> {
-        let active = localStorage.getItem('active')
-
-        if(JSON.parse(active)) {
-            document.body.classList.add('active')
-            logo.src = '/logoBlack.svg'
-        } else {
-            document.body.classList.remove('active')
-            logo.src = '/logo.svg';
-        }
-    })
-</script>
+<script src="/js/pages/index.js" type="module"></script>
 
 <%-include('partials/footer.ejs')%>

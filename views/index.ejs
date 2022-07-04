@@ -1,46 +1,17 @@
 <%-include('partials/head.ejs',{name:'HomePage'})%>
 
 <%-include('partials/nav.ejs')%>
-<div class="wrapper mainWrapper">
-<div class="center">
-    <h1>Welcome to Blogs Anime</h1>
-<p>See the blogs, news  and info about anime and more...</p>
-<h4>By weebs for weebs</h4>
-<a class="btn" href="/blogs">View more</a>
-</div>
 
-</div>
-<script>
+    <main class="wrapper mainWrapper">
 
-    const moon = document.querySelector('.moon')
-    const logo = document.querySelector('#logo>img')
+    <section class="center">
+        <h1>Welcome to Anime Blogs</h1>
+            <p>See the blogs, news  and info about anime and more...</p>
+            <h4>By weebs for weebs</h4>
+        <a class="btn" href="/blogs">View More</a>
+    </section>
 
-    moon.addEventListener('click', (e)=>{
-        document.body.classList.toggle('active')
-
-        localStorage.setItem('active', true)
-
-        if(document.body.classList.contains('active')) {
-          logo.src = '/logoBlack.svg'
-
-        } else {
-            logo.src = '/logo.svg';
-            localStorage.setItem('active', false)
-        }
-
-    })
-
-    window.addEventListener('load', ()=> {
-        let active = localStorage.getItem('active')
-
-        if(JSON.parse(active)) {
-            document.body.classList.add('active')
-            logo.src = '/logoBlack.svg'
-        } else {
-            document.body.classList.remove('active')
-            logo.src = '/logo.svg';
-        }
-    })
-</script>
+    </main>
+<script src="/js/pages/index.js" type="module"></script>
 
 <%-include('partials/footer.ejs')%>

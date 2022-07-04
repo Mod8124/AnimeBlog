@@ -1,22 +1,23 @@
 <%-include('partials/head.ejs',{name:'LoginPage'})%>
 
-<div class="wrap">
-  <div class="part1">
+<main class="wrap">
+
+  <section class="part1">
 
     <div class="logoWrap">
         <div id="logoWrap">
-            <img src="/logoBlack.svg" alt="logo anime blogs" onclick="location.assign('/')">
+            <img src="/images/logoBlack.svg" alt="logo anime blogs" onclick="location.assign('/')">
         </div>
     </div>
         <div class="center">
             <h1>Welcome back!</h1>
-            <p>Login for see news, topics, advices about anime and more....</p>
-            <h4>By weebs for weebs</h4>
+              <p>Login for see news, topics, advices about anime and more....</p>
+              <h4>By weebs for weebs</h4>
             <a class="btn" href="/">View more</a>
         </div>
-  </div>
+  </section>
 
-  <div class="part2">
+  <section class="part2">
 
     <div class="logoWrap wrapMoon">
         <div class="moon">
@@ -24,15 +25,15 @@
         </div>
     </div>
 
-        <div class="center">
+       <section class="center">
             <form>
                 <h2>Log In</h2>
                 <label>Email</label>
-                <input type="text" name="email">
+                <input type="text" name="email" autocomplete="on">
                 <div class="email error"></div>
             
                 <label>Password</label>
-                <input type="password" name="password">
+                <input type="password" name="password" autocomplete="off">
                 <div class="password error"></div>
             
                 <div class="btnForm">
@@ -44,86 +45,9 @@
                </div>
     
             </form>
-        </div>
+        </section>
   </div>
-</div>
+</main>
 
-<script>
-      const moon = document.querySelector('.moon');
-      let active = localStorage.getItem('active')
-      const validEmail = document.querySelector('input[name=email]')
-      const form = document.querySelector('form');
-      const emailError = document.querySelector('.email')
-      const passwordError = document.querySelector('.password')
-
-      function check(e) {
-        let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if(e.target.value.match(regexEmail)) {
-          e.target.classList.add('check')
-      } else {
-          e.target.classList.remove('check')
-      }
-      }
-    
-    validEmail.addEventListener('input', check)
-
-    window.addEventListener('load', ()=> {
-
-       if(JSON.parse(active)) {
-            document.body.classList.add('active')
-
-       } else {
-           document.body.classList.remove('active')
-       }
-    })
-
-    moon.addEventListener('click', () => {
-       document.body.classList.toggle('active')
-
-       if(document.body.classList.contains('active')) {
-            localStorage.setItem('active', true)
-       }  else {
-            localStorage.setItem('active', false)
-       }
-
-    });
-
-    form.addEventListener('submit',  async(e)=> {
-        e.preventDefault();
-        const email = form.email.value;
-        const password = form.password.value;
-
-        emailError.textContent = ''
-        passwordError.textContent = ''
-
-        try {
-            const data = await fetch('/login', {
-                method:"POST",
-                body:JSON.stringify({email,password}),
-                headers:{"Content-Type":"application/json"}
-            })
-
-            const result = await data.json();
-
-           
-            if(result.errors) {
-                emailError.textContent = result.errors.email;
-                passwordError.textContent = result.errors.password;
-            }
-
-            if(result.user) {
-              window.location.href = result.redirect
-            }
-
-        }
-
-        catch(err) {
-            console.log(err)
-        }
-    })
-
-
-
-</script>
-
+<script src="/js/pages/login.js" type="module"></script>
 <%-include('partials/footer.ejs')%>

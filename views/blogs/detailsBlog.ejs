@@ -2,7 +2,7 @@
 
 <%-include('../partials/nav.ejs')%>
 <div class="wrapper wrapBlog wrapBlogDos">
-    <div class="center">
+    <section class="center">
         <h1>Welcome to
             <%if(blog) { %>
                <%=blog.title%>
@@ -11,9 +11,9 @@
          <p>"I don't like expeding more effort thatn I have to."</p>
          <h4>~Ayanokouki Kiyotaka</h4>
          <a class="btn" href="/blogs">More Blogs</a>
-    </div>
+    </section>
     
-    </div>
+</div>
 
     <div class="blogDetail">
         <div class="center">
@@ -21,7 +21,7 @@
             <div class="detail">
                   <div id="details">
                  <%if(blog) {%>
-                    <img src="data:<%=blog.contentType%>;base64,<%=blog.imageBased64%>" alt="">
+                    <img src="data:<%=blog.contentType%>;base64,<%=blog.imageBased64%>" alt="<%=blog.title%>">
                     <h2><%=blog.title%></h2>
                     <p><%=blog.body%></p>
                     <h4>Created by ~<%=blog.user%></h4>
@@ -31,7 +31,8 @@
             </div>
 
                   <div class="comment">
-                         <form id="commentForm">
+
+                         <form id="commentForm" data-id="<%=blog._id%>" data-email="<%=user.email%>">
                             <textarea name="comments" placeholder="Add Comment"></textarea>
                             <button type="submit" class="btn">Send</button>
                          </form>
@@ -64,8 +65,8 @@
 
             </div>
 
-            <div class="editDetail">
-                    <form>
+            <section class="editDetail">
+                    <form data-id="<%=blog._id%>">
                         <h2>Edit this Blog</h2>
                         <label>Title</label>
                         <input type="text" name="title" value="<%=blog.title%>">
@@ -88,149 +89,21 @@
                      <%     } %>
                         </div>  
                     </form>
-            </div>
+            </section>
         </div>
     </div>
 
     <div class="modalDelete">
-        <div class="cardDelete">
+        <section class="cardDelete">
             <span><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M341,128V99c0-19.1-14.5-35-34.5-35H205.4C185.5,64,171,79.9,171,99v29H80v32h9.2c0,0,5.4,0.6,8.2,3.4c2.8,2.8,3.9,9,3.9,9  l19,241.7c1.5,29.4,1.5,33.9,36,33.9h199.4c34.5,0,34.5-4.4,36-33.8l19-241.6c0,0,1.1-6.3,3.9-9.1c2.8-2.8,8.2-3.4,8.2-3.4h9.2v-32  h-91V128z M192,99c0-9.6,7.8-15,17.7-15h91.7c9.9,0,18.6,5.5,18.6,15v29H192V99z M183.5,384l-10.3-192h20.3L204,384H183.5z   M267.1,384h-22V192h22V384z M328.7,384h-20.4l10.5-192h20.3L328.7,384z"/></svg></span>
-            <h1>Are you sure ?</h1>
+            <h2>Are you sure ?</h2>
             <p>This will delete the blog. This proccess cannot be undone.</p>
             <div>
                 <button class="btn btnEdit" >Cancel</button>
                 <button class="btn btnDelete">Delete</button>
             </div>
-        </div>
+        </section>
     </div>
  
-<script>
-
-    const moon = document.querySelector('.moon')
-    const logo = document.querySelector('#logo>img')
-    const search = document.querySelector('input[name=search]');
-    const formComment = document.querySelector('#commentForm');
-    const formEdit = document.querySelector('.editDetail form');
-    const modalDelete = document.querySelector('.modalDelete');
-
-    moon.addEventListener('click', (e)=>{
-        document.body.classList.toggle('active')
-
-        localStorage.setItem('active', true)
-
-        if(document.body.classList.contains('active')) {
-          logo.src = '/logoBlack.svg'
-
-        } else {
-            logo.src = '/logo.svg';
-            localStorage.setItem('active', false)
-        }
-
-    })
-
-    window.addEventListener('load', ()=> {
-        let active = localStorage.getItem('active')
-
-        if(JSON.parse(active)) {
-            document.body.classList.add('active')
-            logo.src = '/logoBlack.svg'
-        } else {
-            document.body.classList.remove('active')
-            logo.src = '/logo.svg';
-        }
-    })
-
-    const getFetch = async url => {
-        try {
-            const data = await fetch(url)
-            const result = await data.json()
-                document.querySelector('p').innerHTML = "\"" +result.quote + "\"";
-                document.querySelector('h4').innerHTML = "~" + result.character
-            return result
-        }
-        catch(err) {
-            console.log(err)
-        }
-       
-    }
-
-    // getFetch('https://animechan.vercel.app/api/random')
-
-    formComment.addEventListener('submit', async(e)=> {
-        e.preventDefault()
-
-        const comments = formComment.comments.value;
-        try {
-           if(comments) {
-            const data = await fetch('/blogs/comments/<%=blog._id%>', {
-               method:"PUT",
-               headers:{"Content-Type":"application/json"},
-               body:JSON.stringify({comments}),
-           })
-           const result = await data.json();
-              document.querySelector('.modifyComment').innerHTML = comments
-             document.querySelector('.modifyEmail').innerHTML = `<%=user.email%>`
-           }
-           modifyComment.innerHTML = 'hola carnal'
-        }
-        catch(err) {
-            console.log(err)
-        }
-    })
-
-    formEdit.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(this)
-
-       if(e.submitter.classList.contains('btnEdit')) {
-
-                try {
-                            const data = await fetch(`/blogs/update/<%=blog._id%>`, {
-                              method:"PUT",
-                              body:formData
-                           })
-                              const result = await data.json()
-                              if(result.location) {
-                                  window.location.href = result.location
-                              }      
-                    }
-
-                catch(err) {
-                    console.log(err)
-                }
-
-       } else {
-                try {
-
-                 modalDelete.style.display = "flex";
-                 modalDelete.addEventListener('click', async (e)=> {
-
-                   if(e.target.localName !== 'button') return
-
-                    if(e.target.innerHTML === 'Cancel') {
-                         modalDelete.style.display = 'none'
-                    } else {
-                        modalDelete.style.display = 'none'
-                          const data = await fetch(`/blogs/<%=blog._id%>`, {
-                          method:"DELETE",
-                          })
-
-                          const result = await data.json();
-
-                          if(result.location) {
-                             window.location.href = result.location;
-                          }   
-                    }
-                 })
-                   
-                } 
-                catch(err) {
-                    console.log(err)
-                }
-       }
-    })
-        
-</script>
-
+    <script src="/js/pages/blog/details.js" type="module"></script>
 <%-include('../partials/footer.ejs')%>

@@ -1,24 +1,13 @@
 const express = require('express')
 const app = express();
-const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/blogRoutes')
 const midlewares = require('./middlewares/authMiddleware')
+const ConnectMongoDb = require('./connections/ConnectMongoDb')
 const port = process.env.PORT || 3000;
+const { connect } = ConnectMongoDb()
 
-require('dotenv').config()
-
-
-//connect to dataBase 
-const connect = async () => {
-    try {
-        const data = await mongoose.connect(process.env.DB_URL,  { useNewUrlParser: true, useUnifiedTopology: true})
-        console.log(`base de datos on : ${data.connection.name}`)
-    } catch(err) {
-        console.log(err)
-    }
-}
 
 //midlewares
 app.use(morgan('dev'))
@@ -43,6 +32,6 @@ app.use((req, res)=> {
 
 app.listen(port, ()=> {
     connect()
-    console.log('server on')
+    console.log(`server on localhost:${port}`)
 })
 

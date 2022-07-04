@@ -3,12 +3,12 @@
 <%-include('../partials/nav.ejs')%>
 <div class="wrapper wrapBlog">
     <div class="center">
-        <h1>Welcome to Blogs Anime</h1>
+        <h1>Welcome to Anime blogs</h1>
          <p>"I don't like expeding more effort thatn I have to."</p>
          <h4>~Ayanokouki Kiyotaka</h4>
-    </div>
+</div>
     
-    </div>
+ </div>
 
     <div class="blogWrap">
         <div class="title">
@@ -31,7 +31,7 @@
     </div>
 
     <div class="createBlog">
-        <div class="center">
+        <section class="center">
             <h2>Create Blog</h2>
             <form>
                 <h2>Blog</h2>
@@ -51,89 +51,9 @@
                     <button class="btn">Send</button>
                 </div>  
             </form>
-        </div>
+        </section>
     </div>
  
-<script>
-
-    const moon = document.querySelector('.moon')
-    const logo = document.querySelector('#logo>img')
-    const search = document.querySelector('input[name=search]');
-    const form = document.querySelector('form')
-    const titleError = document.querySelector('.titleError')
-    const bodyError = document.querySelector(".bodyError")
-    const imageError = document.querySelector('.imageError')
-
-    moon.addEventListener('click', (e)=>{
-        document.body.classList.toggle('active')
-
-        localStorage.setItem('active', true)
-
-        if(document.body.classList.contains('active')) {
-          logo.src = '/logoBlack.svg'
-
-        } else {
-            logo.src = '/logo.svg';
-            localStorage.setItem('active', false)
-        }
-
-    })
-
-    window.addEventListener('load', ()=> {
-        let active = localStorage.getItem('active')
-
-        if(JSON.parse(active)) {
-            document.body.classList.add('active')
-            logo.src = '/logoBlack.svg'
-        } else {
-            document.body.classList.remove('active')
-            logo.src = '/logo.svg';
-        }
-    })
-
-    const getFetch = async url => {
-        try {
-            const data = await fetch(url)
-            const result = await data.json()
-                document.querySelector('p').innerHTML = "\"" +result.quote + "\"";
-                document.querySelector('h4').innerHTML = "~" + result.character
-            return result
-        }
-        catch(err) {
-            console.log(err)
-        }
-       
-    }
-    
-    getFetch('https://animechan.vercel.app/api/random')
-
-    form.addEventListener('submit', async function(e){
-        e.preventDefault();
-
-        const formData = new FormData(this)
-        try {
-            const data = await fetch('/blogs',{
-                method:"POST",
-                body:formData
-            })
-            const result = await data.json()
-
-           if(result.errors) {
-            titleError.innerHTML = result.errors.title
-            bodyError.innerHTML = result.errors.body
-            imageError.innerHTML = result.errors.img
-           }
-
-           if(result.location)
-           window.location.href = result.location
-        }
-        catch(err) {
-            console.log(err)
-        }
-
-       
-    })
-
-</script>
+<script src="/js/pages/blog/index.js" type="module"></script>
 
 <%-include('../partials/footer.ejs')%>

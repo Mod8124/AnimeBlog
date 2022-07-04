@@ -2,12 +2,7 @@ const express = require('express')
 const router = express.Router();
 const blogController = require('../controllers/blogControllers');
 const authController = require('../controllers/authController')
-const User = require('../models/authModel');
-const Blog = require('../models/blogModel');
 const {requireAuth, uploads, checkUser } = require('../middlewares/authMiddleware');
-const { route } = require('express/lib/router');
-
-
 
 //login
 router.get('/login', authController.login_get);

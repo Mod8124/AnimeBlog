@@ -41,6 +41,11 @@ body {
     padding-bottom: 40px;
 }
 
+.center h1 strong {
+    color:red;
+    font-weight: 700;
+}
+
 .center p {
     font-size: 1.2em;
     font-weight: 600;
@@ -220,7 +225,7 @@ form input {
     width:100% ;
     border: none;
     border-bottom: 3px solid #444;
-    background: #fafafa;;
+    background: #fafafa;
 }
 
 form input:focus {
@@ -389,7 +394,7 @@ label {
     font-size: 1.2em;
 }
 
-.create h1, .cardDelete h1 {
+.create h2, .cardDelete h2 {
     color:red;
     font-size: 2.7em;
     padding-bottom: 10px;
@@ -403,7 +408,7 @@ label {
     background-color: rgba(0, 0, 0, 1);
 }
 
-.active .create h1, .active .cardDelete h1 {
+.active .create h2, .active .cardDelete h2 {
     color: white;
 }
 
