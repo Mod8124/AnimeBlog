@@ -1,4 +1,3 @@
-import '../css/style.css'
 import { handleDark, handleLoad, moon } from "../partials/load/load.js"
 
 moon.addEventListener('click', handleDark)

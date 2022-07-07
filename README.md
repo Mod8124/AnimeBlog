@@ -78,7 +78,6 @@ ___
 
 ```
 
-
 ### Example response
 
 ```json 

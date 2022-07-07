@@ -7,7 +7,8 @@ module.exports = {
         login:'./src/pages/login.js',
         signup:'./src/pages/signup.js',
         indexBlog:'/src/pages/blog/indexBlog.js',
-        details:'./src/pages/blog/details.js'
+        details:'./src/pages/blog/details.js',
+        style:'./src/pages/styles.js'
     },
     output:{
         path:path.resolve(__dirname, 'public/js/pages'),
