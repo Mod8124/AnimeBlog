@@ -1,7 +1,7 @@
 # Anime Blog with register
 This is an anime blog, with uploaded images, blog, comments, dark mode and auth system with jwt
 ___
-![Anime-BLog](./public/images/mockup.jpg)
+![Anime-BLog](./public/images/AnimeBlog.jpg)
 
 ## Table of contents
 ___

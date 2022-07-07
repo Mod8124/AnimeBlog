@@ -8,7 +8,6 @@ const ConnectMongoDb = require('./connections/ConnectMongoDb')
 const port = process.env.PORT || 3000;
 const { connect } = ConnectMongoDb()
 
-
 //midlewares
 app.use(morgan('dev'))
 app.use(express.json())
