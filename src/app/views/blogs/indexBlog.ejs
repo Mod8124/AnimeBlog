@@ -1,0 +1,59 @@
+<%-include('../partials/head.ejs',{name:'HomeBlog'})%>
+
+<%-include('../partials/nav.ejs')%>
+<div class="wrapper wrapBlog">
+    <div class="center">
+        <h1>Welcome to Anime blogs</h1>
+         <p>"I don't like expeding more effort that I have to."</p>
+         <h4>~Ayanokouki Kiyotaka</h4>
+</div>
+    
+ </div>
+
+    <div class="blogWrap">
+        <div class="title">
+            <h2>Newest Blogs</h2>
+        </div>
+        <div class="center">
+            <%if(blogs.length > 0) { %>
+                <%blogs.forEach(blog=> { %>
+                    <div class="card">
+                        <img src="data:<%=blog.contentType%>;base64,<%=blog.imageBased64%>" alt="">
+                        <h3><%=blog.title%></h3>
+                        <p><%=blog.body.slice(0,8)%>...</p>
+                  <div class="link">
+                    <a href="/blogs/<%=blog._id%>">See more</a>
+                  </div>
+                    </div>
+            <%})%>
+            <%}%>
+        </div>
+    </div>
+
+    <div class="createBlog">
+        <section class="center">
+            <h2>Create Blog</h2>
+            <form>
+                <h2>Blog</h2>
+                <label>Title</label>
+                <input type="text" name="title">
+                <div class="titleError error"></div>
+            
+                <label>Body</label>
+                <textarea name="body"></textarea>
+                <div class="bodyError error"></div>
+
+                <label>Imagen</label>
+                <input type="file" name="image" placeholder="select image">
+                <div class="imageError error"></div>
+            
+                <div class="btnForm">
+                    <button class="btn">Send</button>
+                </div>  
+            </form>
+        </section>
+    </div>
+ 
+<script src="/js/pages/indexBlog.js" type="module"></script>
+
+<%-include('../partials/footer.ejs')%>
