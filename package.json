@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "node index.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
     "build": "webpack"
   },
